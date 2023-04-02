@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private int id_client;
+    private final int id_client;
+    private static int current_id;
     private int money;
     private List<Product> shopping_cart;
 
 
     public Client() {
-        this.id_client = 0;
+        this.id_client = ++current_id;
         this.money = 0;
         this.shopping_cart = new ArrayList<Product>();
     }
 
 
     public Client(int id_client, int money, List<Product> shopping_cart) {
-        this.id_client = id_client;
+        this.id_client = ++current_id;
         this.money = money;
         this.shopping_cart = shopping_cart;
     }
@@ -27,8 +28,8 @@ public class Client {
         return this.id_client;
     }
 
-    public void setId_client(int id_client) {
-        this.id_client = id_client;
+    public void setCurrent_id(int id) {
+        current_id = id;
     }
 
     public int getMoney() {

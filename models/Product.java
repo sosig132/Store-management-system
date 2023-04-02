@@ -2,22 +2,23 @@ package models;
 
 public abstract class Product {
 
-    protected int id_product;
+    protected final int id_product;
     protected String name;
     protected String brand;
     protected int cost;
+    protected static int current_id;
 
 
     public Product() {
-        this.id_product = 0;
+        this.id_product = ++current_id;
         this.name = "Nothing";
         this.brand = "Nothing";
         this.cost = 0;
     }
 
 
-    public Product(int id_product, String name, String brand, int cost) {
-        this.id_product = id_product;
+    public Product( String name, String brand, int cost) {
+        this.id_product = ++current_id;
         this.name = name;
         this.brand = brand;
         this.cost = cost;
@@ -28,8 +29,8 @@ public abstract class Product {
         return this.id_product;
     }
 
-    public void setId_product(int id_product) {
-        this.id_product = id_product;
+    public static void setCurrent_id(int id) {
+        current_id = id;
     }
 
     public String getName() {

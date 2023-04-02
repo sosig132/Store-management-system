@@ -11,14 +11,14 @@ public class Clothing extends Product {
         this.size = "Nothing";
     }
 
-    public Clothing(int id_product, String name, String brand, int cost){
-        super(id_product, name, brand, cost);
+    public Clothing(String name, String brand, int cost){
+        super(name, brand, cost);
         this.material = "Nothing";
         this.size = "Nothing";
     }
 
-    public Clothing(int id_product, String name, String brand, int cost,String material, String size) {
-        super(id_product, name, brand, cost);
+    public Clothing(String name, String brand, int cost,String material, String size) {
+        super(name, brand, cost);
         
         this.material = material;
         this.size = size;

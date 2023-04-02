@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 public class Storage {
     private Map<Product, Integer> stored_products;
-    private int id_storage;
+    private final int id_storage;
+    private static int current_id;
 
 
     public Map<Product,Integer> getstored_products() {
@@ -20,24 +21,18 @@ public class Storage {
         return this.id_storage;
     }
 
-    public void setId_storage(int id_storage) {
-        this.id_storage = id_storage;
+    public void setCurrent_id(int id) {
+        current_id = id;
     }
 
     public Storage() {
-        this.id_storage = 0;
+        this.id_storage = ++current_id;
         this.stored_products = new HashMap<Product, Integer>();
     }
 
-    public Storage(int id_storage) {
-        this.stored_products = new HashMap<Product, Integer>();
-        this.id_storage = id_storage;
-    }
-
-
-    public Storage(Map<Product,Integer> stored_products, int id_storage) {
+    public Storage(Map<Product,Integer> stored_products) {
         this.stored_products = stored_products;
-        this.id_storage = id_storage;
+        this.id_storage = ++current_id;
     }
 
 

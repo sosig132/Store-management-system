@@ -5,25 +5,26 @@ import java.util.HashMap;
 
 
 public class Distributor {
-    private int id_distributor;
+    private final int id_distributor;
+    private static int current_id;
     private String name;
     private Map<Product,Integer> products;
 
 
     public Distributor() {
-        this.id_distributor = 0;
+        this.id_distributor = ++current_id;
         this.name = "Nothing";
         this.products = new HashMap<Product,Integer>();
     }
 
-    public Distributor(int id_distributor, String name, Map<Product,Integer> products) {
-        this.id_distributor = id_distributor;
+    public Distributor(String name, Map<Product,Integer> products) {
+        this.id_distributor = ++current_id;
         this.name = name;
         this.products = products;
     }
 
-    public Distributor(int id_distributor, String name) {
-        this.id_distributor = id_distributor;
+    public Distributor(String name) {
+        this.id_distributor = ++current_id;
         this.name = name;
         this.products = new HashMap<Product,Integer>();
     }
@@ -32,8 +33,8 @@ public class Distributor {
         return this.id_distributor;
     }
 
-    public void setId_distributor(int id_distributor) {
-        this.id_distributor = id_distributor;
+    public void setCurrent_id(int id) {
+        current_id = id;
     }
 
     public String getName() {

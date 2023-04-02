@@ -7,7 +7,8 @@ import java.util.HashMap;
 
 public class Store {
     private String name;
-    private Integer id_store;
+    private static int current_id;
+    private final int id_store;
     private List<Client> banned_clients;
     private Map<Product, Integer> available_products;
     private Storage storage;
@@ -20,31 +21,31 @@ public class Store {
 
     public Store() {
         this.name = "Nothing";
-        this.id_store = 0;
+        this.id_store = ++current_id;
         this.banned_clients = new ArrayList<Client>();
         this.available_products=new HashMap<Product, Integer>();
         this.storage = new Storage();
     }
 
-    public Store(String name, Integer id_store, List<Client> banned_customers, Map<Product, Integer> available_products, Storage storage) {
+    public Store(String name, List<Client> banned_customers, Map<Product, Integer> available_products, Storage storage) {
         this.name = name;
-        this.id_store = id_store;
+        this.id_store = ++current_id;
         this.banned_clients = banned_customers;
         this.available_products=available_products;
         this.storage = storage;
     }
 
-    public Store(String name, Integer id_store, Map<Product, Integer> available_products) {
+    public Store(String name, Map<Product, Integer> available_products) {
         this.name = name;
-        this.id_store = id_store;
+        this.id_store = ++current_id;
         this.banned_clients = new ArrayList<Client>();
         this.available_products=available_products;
         this.storage = new Storage();
     }
 
-    public Store(String name, Integer id_store) {
+    public Store(String name) {
         this.name = name;
-        this.id_store = id_store;
+        this.id_store = ++current_id;
         this.banned_clients = new ArrayList<Client>();
         this.available_products=new HashMap<Product, Integer>();
         this.storage = new Storage();
@@ -77,9 +78,10 @@ public class Store {
     }
 
 
-    public void setId_store(Integer id_store) {
-        this.id_store = id_store;
+    public static void setCurrent_id(Integer id) {
+        current_id = id;
     }
+
     public List<Client> getBanned_clients() {
         return this.banned_clients;
     }

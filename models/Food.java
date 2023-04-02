@@ -11,13 +11,13 @@ public class Food extends Product{
         expiration_Date =  LocalDate.now();
     }
 
-    public Food(int id_product, String name, String brand, int cost){
-        super(id_product, name, brand, cost);
+    public Food(String name, String brand, int cost){
+        super(name, brand, cost);
         this.expiration_Date =  LocalDate.now();
     }
 
-    public Food(int id_product, String name, String brand, int cost, LocalDate expiration_Date) {
-        super(id_product, name, brand, cost);
+    public Food(String name, String brand, int cost, LocalDate expiration_Date) {
+        super(name, brand, cost);
         this.expiration_Date = expiration_Date;
     }
 

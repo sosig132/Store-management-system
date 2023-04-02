@@ -11,13 +11,13 @@ public class Sport  extends Product{
     }
 
 
-    public Sport(int id_product, String name, String brand, int cost, String sport) {
-        super(id_product, name, brand, cost);
+    public Sport(String name, String brand, int cost, String sport) {
+        super(name, brand, cost);
         this.sport = sport;
     }
     
-    public Sport(int id_product, String name, String brand, int cost) {
-        super(id_product, name, brand, cost);
+    public Sport(String name, String brand, int cost) {
+        super(name, brand, cost);
         this.sport = "Nothing";
     }
 

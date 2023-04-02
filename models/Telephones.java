@@ -1,6 +1,8 @@
 package models;
 
 public class Telephones extends Product {
+    
+    
     private String dimensions;
 
 
@@ -10,8 +12,8 @@ public class Telephones extends Product {
     }
 
 
-    public Telephones(int id_product, String name, String brand, int cost, String dimensions) {
-        super(id_product, name, brand, cost);
+    public Telephones(String name, String brand, int cost, String dimensions) {
+        super(name, brand, cost);
         this.dimensions = dimensions;
     }
 
