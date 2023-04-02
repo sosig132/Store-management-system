@@ -5,18 +5,39 @@ import java.util.*;
 public class Store {
     private String name;
     private Integer id_store;
-    private List<Integer> banned_customers = new ArrayList<Integer>();
-    
+    private List<Client> banned_clients;
+    private Map<Product, Integer> available_products;
     //constructors
     
+    
+
+
     public Store() {
         this.name = "Nothing";
         this.id_store = 0;
+        this.banned_clients = new ArrayList<Client>();
+        this.available_products=new HashMap<Product, Integer>();
+    }
+
+    public Store(String name, Integer id_store, List<Client> banned_customers, Map<Product, Integer> available_products) {
+        this.name = name;
+        this.id_store = id_store;
+        this.banned_clients = banned_customers;
+        this.available_products=available_products;
+    }
+
+    public Store(String name, Integer id_store, Map<Product, Integer> available_products) {
+        this.name = name;
+        this.id_store = id_store;
+        this.banned_clients = new ArrayList<Client>();
+        this.available_products=available_products;
     }
 
     public Store(String name, Integer id_store) {
         this.name = name;
         this.id_store = id_store;
+        this.banned_clients = new ArrayList<Client>();
+        this.available_products=new HashMap<Product, Integer>();
     }
     
     //getters setters
@@ -37,25 +58,34 @@ public class Store {
     public void setId_store(Integer id_store) {
         this.id_store = id_store;
     }
-    public List<Integer> getBanned_customers() {
-        return this.banned_customers;
+    public List<Client> getBanned_clients() {
+        return this.banned_clients;
     }
 
-    public void setBanned_customers(List<Integer> banned_customers) {
-        this.banned_customers = banned_customers; 
+    public void setBanned_clients(List<Client> banned_clients) {
+        this.banned_clients = banned_clients;
+    }
 
+    public Map<Product,Integer> getAvailable_products() {
+        return this.available_products;
+    }
 
-
+    public void setAvailable_products(Map<Product,Integer> available_products) {
+        this.available_products = available_products;
+    }
         
+
+    
 
     @Override
     public String toString() {
         return "Store{" +
             " name='" + getName() + "'" +
             ", id_store='" + getId_store() + "'" +
+            ", banned_clients='" + getBanned_clients() + "'" +
+            ", available_products='" + getAvailable_products() + "'" +
             "}";
     }
-
 
 
     
