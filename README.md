@@ -1,1 +1,2 @@
-# Store-management-system--PAO-project-
+# Sistem gestionare magazine
+
