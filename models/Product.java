@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Product {
+public class Product {
 
     protected final int idProduct;
     protected String name;
@@ -33,6 +33,10 @@ public abstract class Product {
         currentId = id;
     }
 
+    public static int getCurrentId() {
+        return currentId;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -56,7 +60,6 @@ public abstract class Product {
     public void setCost(int cost) {
         this.cost = cost;
     }
-
 
 
     @Override

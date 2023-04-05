@@ -21,7 +21,7 @@ public class Storage {
         return this.idStorage;
     }
 
-    public void setCurrentId(int id) {
+    public static void setCurrentId(int id) {
         currentId = id;
     }
 

@@ -1,33 +1,31 @@
 package models;
 
-import java.time.LocalDate;
-
 public class Food extends Product{
-    private LocalDate expirationDate;
+    private int protein;
 
 
     public Food() {
         super();
-        expirationDate =  LocalDate.now();
+        protein = 0;
     }
 
     public Food(String name, String brand, int cost){
         super(name, brand, cost);
-        this.expirationDate =  LocalDate.now();
+        this.protein = 0;
     }
 
-    public Food(String name, String brand, int cost, LocalDate expirationDate) {
+    public Food(String name, String brand, int cost, int protein) {
         super(name, brand, cost);
-        this.expirationDate = expirationDate;
+        this.protein = protein;
     }
 
 
-    public LocalDate getExpirationDate() {
-        return this.expirationDate;
+    public int getProtein() {
+        return this.protein;
     }
 
-    public void setExpirationDate(LocalDate expirationLocalDate) {
-        this.expirationDate = expirationLocalDate;
+    public void setProtein(int protein) {
+        this.protein = protein;
     }
 
 
@@ -38,7 +36,7 @@ public class Food extends Product{
             ", name='" + getName() + "'" +
             ", brand='" + getBrand() + "'" +
             ", cost='" + getCost() + "'" +
-            ", expirationLocalDate='" + getExpirationDate() + "'" +
+            ", protein='" + getProtein() + "'" +
             "}";
     }
 

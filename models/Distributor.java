@@ -33,7 +33,7 @@ public class Distributor {
         return this.idDistributor;
     }
 
-    public void setCurrentId(int id) {
+    public static void setCurrentId(int id) {
         currentId = id;
     }
 
