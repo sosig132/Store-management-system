@@ -3,42 +3,42 @@ package models;
 import java.time.LocalDate;
 
 public class Food extends Product{
-    private LocalDate expiration_Date;
+    private LocalDate expirationDate;
 
 
     public Food() {
         super();
-        expiration_Date =  LocalDate.now();
+        expirationDate =  LocalDate.now();
     }
 
     public Food(String name, String brand, int cost){
         super(name, brand, cost);
-        this.expiration_Date =  LocalDate.now();
+        this.expirationDate =  LocalDate.now();
     }
 
-    public Food(String name, String brand, int cost, LocalDate expiration_Date) {
+    public Food(String name, String brand, int cost, LocalDate expirationDate) {
         super(name, brand, cost);
-        this.expiration_Date = expiration_Date;
+        this.expirationDate = expirationDate;
     }
 
 
-    public LocalDate getExpiration_Date() {
-        return this.expiration_Date;
+    public LocalDate getExpirationDate() {
+        return this.expirationDate;
     }
 
-    public void setExpiration_Date(LocalDate expiration_LocalDate) {
-        this.expiration_Date = expiration_LocalDate;
+    public void setExpirationDate(LocalDate expirationLocalDate) {
+        this.expirationDate = expirationLocalDate;
     }
 
 
     @Override
     public String toString() {
         return "Food{" +
-            " id_product='" + getId_product() + "'" +
+            " idProduct='" + getIdProduct() + "'" +
             ", name='" + getName() + "'" +
             ", brand='" + getBrand() + "'" +
             ", cost='" + getCost() + "'" +
-            ", expiration_LocalDate='" + getExpiration_Date() + "'" +
+            ", expirationLocalDate='" + getExpirationDate() + "'" +
             "}";
     }
 

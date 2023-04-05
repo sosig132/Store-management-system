@@ -30,7 +30,7 @@ public class Telephones extends Product {
     @Override
     public String toString() {
         return "{" +
-            " id_product='" + getId_product() + "'" +
+            " idProduct='" + getIdProduct() + "'" +
             ", name='" + getName() + "'" +
             ", brand='" + getBrand() + "'" +
             ", cost='" + getCost() + "'" +

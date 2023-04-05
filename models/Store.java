@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 public class Store {
     private String name;
-    private static int current_id;
-    private final int id_store;
-    private List<Client> banned_clients;
-    private Map<Product, Integer> available_products;
+    private static int currentId;
+    private final int idStore;
+    private List<Client> bannedClients;
+    private Map<Product, Integer> availableProducts;
     private Storage storage;
 
 
@@ -21,33 +21,33 @@ public class Store {
 
     public Store() {
         this.name = "Nothing";
-        this.id_store = ++current_id;
-        this.banned_clients = new ArrayList<Client>();
-        this.available_products=new HashMap<Product, Integer>();
+        this.idStore = ++currentId;
+        this.bannedClients = new ArrayList<Client>();
+        this.availableProducts=new HashMap<Product, Integer>();
         this.storage = new Storage();
     }
 
-    public Store(String name, List<Client> banned_customers, Map<Product, Integer> available_products, Storage storage) {
+    public Store(String name, List<Client> bannedCustomers, Map<Product, Integer> availableProducts, Storage storage) {
         this.name = name;
-        this.id_store = ++current_id;
-        this.banned_clients = banned_customers;
-        this.available_products=available_products;
+        this.idStore = ++currentId;
+        this.bannedClients = bannedCustomers;
+        this.availableProducts=availableProducts;
         this.storage = storage;
     }
 
-    public Store(String name, Map<Product, Integer> available_products) {
+    public Store(String name, Map<Product, Integer> availableProducts) {
         this.name = name;
-        this.id_store = ++current_id;
-        this.banned_clients = new ArrayList<Client>();
-        this.available_products=available_products;
+        this.idStore = ++currentId;
+        this.bannedClients = new ArrayList<Client>();
+        this.availableProducts=availableProducts;
         this.storage = new Storage();
     }
 
     public Store(String name) {
         this.name = name;
-        this.id_store = ++current_id;
-        this.banned_clients = new ArrayList<Client>();
-        this.available_products=new HashMap<Product, Integer>();
+        this.idStore = ++currentId;
+        this.bannedClients = new ArrayList<Client>();
+        this.availableProducts=new HashMap<Product, Integer>();
         this.storage = new Storage();
     }
     
@@ -62,9 +62,9 @@ public class Store {
         this.name = name;
     }
 
-    public Integer getId_store() {
+    public Integer getIdStore() {
 
-        return this.id_store;
+        return this.idStore;
     }
 
 
@@ -78,24 +78,24 @@ public class Store {
     }
 
 
-    public static void setCurrent_id(Integer id) {
-        current_id = id;
+    public static void setCurrentId(Integer id) {
+        currentId = id;
     }
 
-    public List<Client> getBanned_clients() {
-        return this.banned_clients;
+    public List<Client> getBannedClients() {
+        return this.bannedClients;
     }
 
-    public void setBanned_clients(List<Client> banned_clients) {
-        this.banned_clients = banned_clients;
+    public void setBannedClients(List<Client> bannedClients) {
+        this.bannedClients = bannedClients;
     }
 
-    public Map<Product,Integer> getAvailable_products() {
-        return this.available_products;
+    public Map<Product,Integer> getAvailableProducts() {
+        return this.availableProducts;
     }
 
-    public void setAvailable_products(Map<Product,Integer> available_products) {
-        this.available_products = available_products;
+    public void setAvailableProducts(Map<Product,Integer> availableProducts) {
+        this.availableProducts = availableProducts;
     }
         
 
@@ -107,9 +107,9 @@ public class Store {
     public String toString() {
         return "Store{" +
             " name='" + getName() + "'" +
-            ", id_store='" + getId_store() + "'" +
-            ", banned_clients='" + getBanned_clients() + "'" +
-            ", available_products='" + getAvailable_products() + "'" +
+            ", idStore='" + getIdStore() + "'" +
+            ", bannedClients='" + getBannedClients() + "'" +
+            ", availableProducts='" + getAvailableProducts() + "'" +
             ", storage='" + getStorage() + "'" +
             "}";
     }

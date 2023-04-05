@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private final int id_client;
-    private static int current_id;
+    private final int idClient;
+    private static int currentId;
     private int money;
-    private List<Product> shopping_cart;
+    private List<Product> shoppingCart;
 
 
     public Client() {
-        this.id_client = ++current_id;
+        this.idClient = ++currentId;
         this.money = 0;
-        this.shopping_cart = new ArrayList<Product>();
+        this.shoppingCart = new ArrayList<Product>();
     }
 
 
-    public Client(int id_client, int money, List<Product> shopping_cart) {
-        this.id_client = ++current_id;
+    public Client(int idClient, int money, List<Product> shoppingCart) {
+        this.idClient = ++currentId;
         this.money = money;
-        this.shopping_cart = shopping_cart;
+        this.shoppingCart = shoppingCart;
     }
 
 
-    public int getId_client() {
-        return this.id_client;
+    public int getIdClient() {
+        return this.idClient;
     }
 
-    public void setCurrent_id(int id) {
-        current_id = id;
+    public void setCurrentId(int id) {
+        currentId = id;
     }
 
     public int getMoney() {
@@ -40,12 +40,12 @@ public class Client {
         this.money = money;
     }
 
-    public List<Product> getShopping_cart() {
-        return this.shopping_cart;
+    public List<Product> getShoppingCart() {
+        return this.shoppingCart;
     }
 
-    public void setShopping_cart(List<Product> shopping_cart) {
-        this.shopping_cart = shopping_cart;
+    public void setShoppingCart(List<Product> shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
 
@@ -53,9 +53,9 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-            " id_client='" + getId_client() + "'" +
+            " idClient='" + getIdClient() + "'" +
             ", money='" + getMoney() + "'" +
-            ", shopping_cart='" + getShopping_cart() + "'" +
+            ", shoppingCart='" + getShoppingCart() + "'" +
             "}";
     }
 

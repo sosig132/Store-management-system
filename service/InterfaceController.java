@@ -1,5 +1,14 @@
 package service;
 
-public class InterfaceController {
+public interface InterfaceController {
+    void createStore();
+
+    void createStorage();
+
+    void createProduct();
+
+    void createDistributor();
+
+    void createClient();
     
 }

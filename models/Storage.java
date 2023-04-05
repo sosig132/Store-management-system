@@ -4,43 +4,43 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Storage {
-    private Map<Product, Integer> stored_products;
-    private final int id_storage;
-    private static int current_id;
+    private Map<Product, Integer> storedProducts;
+    private final int idStorage;
+    private static int currentId;
 
 
-    public Map<Product,Integer> getstored_products() {
-        return this.stored_products;
+    public Map<Product,Integer> getstoredProducts() {
+        return this.storedProducts;
     }
 
-    public void setstored_products(Map<Product,Integer> stored_products) {
-        this.stored_products = stored_products;
+    public void setstoredProducts(Map<Product,Integer> storedProducts) {
+        this.storedProducts = storedProducts;
     }
 
-    public int getId_storage() {
-        return this.id_storage;
+    public int getIdStorage() {
+        return this.idStorage;
     }
 
-    public void setCurrent_id(int id) {
-        current_id = id;
+    public void setCurrentId(int id) {
+        currentId = id;
     }
 
     public Storage() {
-        this.id_storage = ++current_id;
-        this.stored_products = new HashMap<Product, Integer>();
+        this.idStorage = ++currentId;
+        this.storedProducts = new HashMap<Product, Integer>();
     }
 
-    public Storage(Map<Product,Integer> stored_products) {
-        this.stored_products = stored_products;
-        this.id_storage = ++current_id;
+    public Storage(Map<Product,Integer> storedProducts) {
+        this.storedProducts = storedProducts;
+        this.idStorage = ++currentId;
     }
 
 
     @Override
     public String toString() {
         return "Storage{" +
-            " stored_products='" + getstored_products() + "'" +
-            ", id_storage='" + getId_storage() + "'" +
+            " storedProducts='" + getstoredProducts() + "'" +
+            ", idStorage='" + getIdStorage() + "'" +
             "}";
     }
 

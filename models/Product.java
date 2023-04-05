@@ -2,15 +2,15 @@ package models;
 
 public abstract class Product {
 
-    protected final int id_product;
+    protected final int idProduct;
     protected String name;
     protected String brand;
     protected int cost;
-    protected static int current_id;
+    protected static int currentId;
 
 
     public Product() {
-        this.id_product = ++current_id;
+        this.idProduct = ++currentId;
         this.name = "Nothing";
         this.brand = "Nothing";
         this.cost = 0;
@@ -18,19 +18,19 @@ public abstract class Product {
 
 
     public Product( String name, String brand, int cost) {
-        this.id_product = ++current_id;
+        this.idProduct = ++currentId;
         this.name = name;
         this.brand = brand;
         this.cost = cost;
     }
 
 
-    public int getId_product() {
-        return this.id_product;
+    public int getIdProduct() {
+        return this.idProduct;
     }
 
-    public static void setCurrent_id(int id) {
-        current_id = id;
+    public static void setCurrentId(int id) {
+        currentId = id;
     }
 
     public String getName() {
@@ -62,7 +62,7 @@ public abstract class Product {
     @Override
     public String toString() {
         return "Product{" +
-            " id_product='" + getId_product() + "'" +
+            " idProduct='" + getIdProduct() + "'" +
             ", name='" + getName() + "'" +
             ", brand='" + getBrand() + "'" +
             ", cost='" + getCost() + "'" +

@@ -33,7 +33,7 @@ public class Sport  extends Product{
     @Override
     public String toString() {
         return "Sport{" +
-            " id_product='" + getId_product() + "'" +
+            " idProduct='" + getIdProduct() + "'" +
             ", name='" + getName() + "'" +
             ", brand='" + getBrand() + "'" +
             ", cost='" + getCost() + "'" +
