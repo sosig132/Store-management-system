@@ -3,7 +3,6 @@ package view;
 import models.*;
 import service.Controller;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
 
