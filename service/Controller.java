@@ -252,6 +252,7 @@ public class Controller implements ControllerInterface{
     public void putItemsInCart(int clientId, int storeId){
         Client client = clients.get(clientId);
         Store store = stores.get(storeId);
+        int cost = 0;
         do{
             System.out.println("What do you want to buy?:");
             int j = 1;
@@ -260,15 +261,15 @@ public class Controller implements ControllerInterface{
                 ++j;
             }
 
-            int cost = 0;
 
             int input = in.nextInt();
-            j=1;
+            j=0;
             for(Product product : store.getAvailableProducts().keySet()){
-                System.out.println(Integer.toString(j)+'.'+product);
+                System.out.println(Integer.toString(++j)+'.'+product);
                 if(j==input){
                     if(store.getAvailableProducts().get(product)>0){
                         client.getShoppingCart().add(product);
+                          
                         store.getAvailableProducts().put(product,store.getAvailableProducts().get(product)-1);
                         cost+=product.getCost();
                     }
@@ -323,7 +324,7 @@ public class Controller implements ControllerInterface{
 
         int inputt = in.nextInt();
 
-        if(inputt < 0){
+        if(inputt <= 0){
             System.out.println("Invalid input!");
             return;
         }
@@ -349,7 +350,7 @@ public class Controller implements ControllerInterface{
         in.nextLine();
         int inpuut = in.nextInt();
 
-        if(inpuut < 0){
+        if(inpuut <= 0){
             System.out.println("Invalid input!");
             return;
         }
@@ -358,8 +359,12 @@ public class Controller implements ControllerInterface{
 
         store.getAvailableProducts().put(products.get(input), toMove);
 
-        storage.getstoredProducts().put(products.get(input), storage.getstoredProducts().get(products.get(input))-toMove);
-
+        if(storage.getstoredProducts().get(products.get(input))-toMove>0){    
+            storage.getstoredProducts().put(products.get(input), storage.getstoredProducts().get(products.get(input))-toMove);
+        }
+        else{
+            storage.getstoredProducts().remove(products.get(input));
+        }
     }
 }
 
