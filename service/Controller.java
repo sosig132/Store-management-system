@@ -321,9 +321,14 @@ public class Controller implements ControllerInterface{
 
         in.nextLine();
 
-        
+        int inputt = in.nextInt();
 
-        storage.getstoredProducts().put(products.get(input), in.nextInt());
+        if(inputt < 0){
+            System.out.println("Invalid input!");
+            return;
+        }
+
+        storage.getstoredProducts().put(products.get(input), inputt);
     }
 
     public void move(Store store){
