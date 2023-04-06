@@ -24,10 +24,10 @@ public class Main {
     }
     
     public static void start(){
-        Integer[] inputs = {1,2,3,4,5,6,7,8,9,10,11};
+        int[] inputs = {1,2,3,4,5,6,7,8,9,10,11};
             
 
-        Integer input;
+        int input;
             
         do{    
             System.out.println("What do you want to do?: ");
@@ -107,7 +107,7 @@ public class Main {
                     System.out.println("Invalid input!");
                 }
             }
-        }while (!Arrays.asList(inputs).contains(input));
+        }while (true);
     }
 
     public static void manageStore(Store store){
