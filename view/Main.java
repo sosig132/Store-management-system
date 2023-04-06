@@ -24,10 +24,10 @@ public class Main {
     }
     
     public static void start(){
-            int[] inputs = {1,2,3,4,5,6,7,8,9,10,11};
+        Integer[] inputs = {1,2,3,4,5,6,7,8,9,10,11};
             
 
-            int input;
+        Integer input;
             
         do{    
             System.out.println("What do you want to do?: ");
