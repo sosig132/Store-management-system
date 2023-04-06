@@ -1,13 +1,12 @@
 package service;
 
 import models.*;
-//pentru produse, utilizatorul creeaza produse, din asta fac eu distribuitori 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Controller implements InterfaceController{
+public class Controller implements ControllerInterface{
 
     private Scanner in;
     private List<Store> stores;
@@ -68,7 +67,7 @@ public class Controller implements InterfaceController{
         return client;//todo
     }
 
-    public Product inputProduct(){
+    private Product inputProduct(){
         
         Product product = new Product();
         System.out.println("Please input what kind of product you want to create: ");
@@ -161,18 +160,22 @@ public class Controller implements InterfaceController{
 
 
 
+    @Override
     public List<Store> getStores(){
         return stores;
     }
 
+    @Override
     public List<Product> getProducts(){
         return products;
     }
 
+    @Override
     public List<Client> getClients() {
         return clients;
     }
 
+    @Override
     public List<Distributor> getDistributors() {
         return distributors;
     }
@@ -295,7 +298,7 @@ public class Controller implements InterfaceController{
         }while(true);
     }
 
-    public void pay(Client client, int cost){
+    private void pay(Client client, int cost){
         client.setMoney(client.getMoney()-cost);
     }
 
@@ -340,10 +343,17 @@ public class Controller implements InterfaceController{
 
         in.nextLine();
         int inpuut = in.nextInt();
-        
-        store.getAvailableProducts().put(products.get(input), Math.max(inpuut, storage.getstoredProducts().get(products.get(input))));
 
-        storage.getstoredProducts().put(products.get(input), storage.getstoredProducts().get(products.get(input))-Math.max(inpuut, storage.getstoredProducts().get(products.get(input))));
+        if(inpuut < 0){
+            System.out.println("Invalid input!");
+            return;
+        }
+        
+        int toMove=Math.max(inpuut, storage.getstoredProducts().get(products.get(input)));
+
+        store.getAvailableProducts().put(products.get(input), toMove);
+
+        storage.getstoredProducts().put(products.get(input), storage.getstoredProducts().get(products.get(input))-toMove);
 
     }
 }

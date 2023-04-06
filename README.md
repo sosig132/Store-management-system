@@ -1,3 +1,17 @@
 # Sistem gestionare magazine
 
-![Screenshot_81](https://user-images.githubusercontent.com/71657406/229377048-fe3f3989-fb41-4162-bc9b-08b7d4bb448d.png)
+Clase: Magazin, Client, Produs, Depozit, Distribuitor, Mancare, Sport, Haine, Telefoane
+
+Functii in meniu: 
+    -creeaza entitate 
+    -du client la magazin 
+    -afiseaza:
+        -clienti 
+        -un client specific 
+        -magazine 
+        -un magazin specific 
+        -distribuitori 
+        -un distribuitor specific 
+        -produse 
+        -un produs specific 
+    -gestioneaza magazin(comanda produse si muta-le din depozit in magazin)
