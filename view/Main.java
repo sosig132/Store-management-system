@@ -24,7 +24,7 @@ public class Main {
     
     public static void start(){
             
-        int input;
+        int input=-1;
             
         do{    
             System.out.println("What do you want to do?: ");
@@ -40,7 +40,18 @@ public class Main {
             System.out.println("10.Print products");
             System.out.println("11.Print specific product");
             System.out.println("12.Exit");
-            input = in.nextInt();
+            boolean catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
         
             switch(input){
                 case 1:{
@@ -68,7 +79,20 @@ public class Main {
                     for(Store store : controller.getStores()){
                         System.out.println(Integer.toString(++j)+'.'+store.getName());
                     }
-                    int inpuut = in.nextInt()-1;
+                    int inpuut =-1;
+
+                    catch_error=true;
+                    do{
+                        if(in.hasNextInt()){   
+                            inpuut = in.nextInt()-1;
+                            in.nextLine();
+                            catch_error = false;
+                        }
+                        else{
+                            in.nextLine();
+                            System.out.println("Invalid input!");
+                        }
+                    }while(catch_error==true);
 
                     manageStore(controller.getStores().get(inpuut));
                     break;
@@ -114,7 +138,21 @@ public class Main {
             System.out.println("1.Order product");
             System.out.println("2.Move product from storage to available stock");
             System.out.println("3.Return");
-            int input = in.nextInt();
+            int input = -1;
+            boolean catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
+            
+            
             switch(input){
                 case 1:{
                     controller.order(store);
@@ -159,7 +197,20 @@ public class Main {
             ++j;
         }
         
-        int clientNr = in.nextInt()-1;
+        int clientNr = -1;
+
+        boolean catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    clientNr = in.nextInt()-1;
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
         while (clientNr>=controller.getClients().size()||clientNr<0){
             System.out.println("Invalid input");
             System.out.println("Which client do you want to use?");
@@ -168,10 +219,21 @@ public class Main {
                 System.out.println(Integer.toString(j)+'.'+client);
                 ++j;
             }
-            clientNr = in.nextInt()-1;
+            catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    clientNr = in.nextInt()-1;
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
         }
 
-        int storeNr;
+        int storeNr=-1;
         
         do{
             System.out.println("Which store do you want the client to go to?");
@@ -181,7 +243,19 @@ public class Main {
                 ++j;
             }
             
-            storeNr = in.nextInt()-1;
+
+            catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    storeNr = in.nextInt()-1;
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
             
             if (storeNr>=controller.getStores().size()||storeNr<0){
                 System.out.println("Invalid input");
@@ -205,7 +279,19 @@ public class Main {
         }
 
         System.out.println("Please input the product's id: ");
-        int input = in.nextInt();
+        int input = -1;
+        boolean catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                input = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
         controller.printProduct(input);
     }
 
@@ -219,7 +305,19 @@ public class Main {
         }
 
         System.out.println("Please input the distributor's id: ");
-        int input = in.nextInt();
+        int input = -1;
+        boolean catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                input = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
         
         controller.printDistributor(input);
     }
@@ -236,7 +334,19 @@ public class Main {
         }
 
         System.out.println("Please input the store's id: ");
-        int input = in.nextInt();
+        int input = -1;
+        boolean catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                input = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
         controller.printStore(input);
     }
 
@@ -251,18 +361,41 @@ public class Main {
         }
 
         System.out.println("Please input the client's id: ");
-        int input = in.nextInt();
+        int input = -1;
+        boolean catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                input = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
         controller.printClient(input);
     }
 
     public static void createEntity(){
-        int input;
+        int input=-1;
         System.out.println("What kind of entity do you want to create?: ");
         System.out.println("1.Store");
         System.out.println("2.Client");
         System.out.println("3.Product");
         do{
-            input = in.nextInt();
+            boolean catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
 
             switch(input){
                 case 1:{

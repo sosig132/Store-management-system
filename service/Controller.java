@@ -78,7 +78,7 @@ public class Controller implements ControllerInterface{
             }
             else{
                 in.nextLine();
-                System.out.println("Invalid input! Try again");
+                System.out.println("Invalid input!");
             }
         }while(catch_error==true);
         return client;
@@ -136,7 +136,7 @@ public class Controller implements ControllerInterface{
         }while(typeOfProduct!=1 && typeOfProduct!=2 && typeOfProduct!=3 && typeOfProduct!=4);
 
         System.out.println("Please input your product's name: ");
-        in.nextLine();
+        //in.nextLine();
         product.setName(in.nextLine());
 
 
@@ -156,7 +156,7 @@ public class Controller implements ControllerInterface{
             }
             else{
                 in.nextLine();
-                System.out.println("Invalid input! Try again");
+                System.out.println("Invalid input!");
             }
         }while(catch_error==true);
         
@@ -167,8 +167,19 @@ public class Controller implements ControllerInterface{
             case 1 :{
                 
                 System.out.println("Please input how much protein your food has: ");
-                ((Food)product).setProtein(in.nextInt());
-
+                catch_error = true;
+        
+                do{
+                    if(in.hasNextInt()){   
+                        ((Food)product).setProtein(in.nextInt());                        
+                        //in.nextLine();
+                        catch_error = false;
+                    }
+                    else{
+                        in.nextLine();
+                        System.out.println("Invalid input!");
+                    }
+                }while(catch_error==true);
                 break;
 
             }
@@ -190,9 +201,34 @@ public class Controller implements ControllerInterface{
             case 4:{
                 in.nextLine();
                 System.out.println("Please input the phone's height: ");
-                ((Telephone)product).setHeight(in.nextInt());
+                catch_error = true;
+        
+                do{
+                    if(in.hasNextInt()){   
+                        ((Telephone)product).setHeight(in.nextInt());
+                        in.nextLine();
+                        catch_error = false;
+                    }
+                    else{
+                        in.nextLine();
+                        System.out.println("Invalid input!");
+                    }
+                }while(catch_error==true);
                 System.out.println("Please input the phone's width: ");
-                ((Telephone)product).setWidth(in.nextInt());
+                catch_error = true;
+        
+                do{
+                    if(in.hasNextInt()){   
+                        ((Telephone)product).setWidth(in.nextInt());
+                        in.nextLine();
+                        catch_error = false;
+                    }
+                    else{
+                        in.nextLine();
+                        System.out.println("Invalid input!");
+                    }
+                }while(catch_error==true);
+                
                 break;
             }
         }
@@ -301,9 +337,20 @@ public class Controller implements ControllerInterface{
                 System.out.println(Integer.toString(j)+'.'+product);
                 ++j;
             }
-
-
-            int input = in.nextInt();
+            int input=-1;
+            boolean catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
+            
             j=0;
             for(Product product : store.getAvailableProducts().keySet()){
                 System.out.println(Integer.toString(++j)+'.'+product);
@@ -329,8 +376,18 @@ public class Controller implements ControllerInterface{
 
             System.out.println("If you want to go pay, type "+ Integer.toString(store.getAvailableProducts().size()+2));
 
-            in.nextLine();
-            input = in.nextInt();
+            catch_error=true;
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
 
             if (input == store.getAvailableProducts().size()+2){
                 pay(client, cost);
@@ -352,8 +409,20 @@ public class Controller implements ControllerInterface{
         for(Product product: products){
             System.out.println(Integer.toString(++j)+'.'+product);
         }
-
-            int input = in.nextInt()-1;
+            boolean catch_error=true;
+            int input = -1;
+            
+            do{
+                if(in.hasNextInt()){   
+                    input = in.nextInt()-1;
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
             if(input<0 || j<input){
                 System.out.println("Invalid input!");
                 return;
@@ -361,9 +430,21 @@ public class Controller implements ControllerInterface{
 
         System.out.println("How many?");
 
-        in.nextLine();
 
-        int inputt = in.nextInt();
+
+        int inputt = -1;
+        catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                inputt = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
 
         if(inputt <= 0){
             System.out.println("Invalid input!");
@@ -381,16 +462,39 @@ public class Controller implements ControllerInterface{
             System.out.println(Integer.toString(++j)+'.'+product+" quantity: "+storage.getstoredProducts().get(product));
         }
 
-        int input = in.nextInt()-1;
+        int input =-1;
+        boolean catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                input = in.nextInt()-1;
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
+
         if(input<0 || j<input){
             System.out.println("Invalid input!");
             return;
         }
         System.out.println("How many do you want to move?");
 
-        in.nextLine();
-        int inpuut = in.nextInt();
-
+        int inpuut = -1;
+        catch_error=true;
+        do{
+            if(in.hasNextInt()){   
+                inpuut = in.nextInt();
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
         if(inpuut <= 0){
             System.out.println("Invalid input!");
             return;
