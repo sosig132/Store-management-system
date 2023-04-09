@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static Controller controller = new Controller();
+    private static Controller controller = Controller.getInstance();
 
     private static Scanner in = new Scanner(System.in);
 
@@ -137,6 +137,21 @@ public class Main {
     }
 
     public static void shopping(){
+        if(controller.getClients().isEmpty()){
+            System.out.println("You didn't create any clients!");
+            return;
+        }
+
+        if(controller.getStores().isEmpty()){
+            System.out.println("You didn't create any stores!");
+            return;
+        }
+
+        if(controller.getProducts().isEmpty()){
+            System.out.println("You didn't create any products!");
+            return;
+        }
+        
         System.out.println("Which client do you want to use?");
         int j = 1;
         for (Client client : controller.getClients()){
@@ -181,26 +196,60 @@ public class Main {
         }
     }
     public static void printSpecificProduct(){
+        if(controller.getProducts().isEmpty()){
+            System.out.println("There are no products!");
+            return;
+        }
+        for(Product p : controller.getProducts()){
+            System.out.println(Integer.toString(p.getIdProduct())+". "+p.getName());
+        }
+
         System.out.println("Please input the product's id: ");
         int input = in.nextInt();
         controller.printProduct(input);
     }
 
     public static void printSpecificDistributor(){
+        if(controller.getDistributors().isEmpty()){
+            System.out.println("There are no distributors!");
+            return;
+        }
+        for(Distributor d : controller.getDistributors()){
+            System.out.println(Integer.toString(d.getIdDistributor())+". "+d.getName());
+        }
+
         System.out.println("Please input the distributor's id: ");
         int input = in.nextInt();
         
-            controller.printDistributor(input);
+        controller.printDistributor(input);
     }
 
 
     public static void printSpecificStore(){
+        if(controller.getStores().isEmpty()){
+            System.out.println("There are no stores!");
+            return;
+        }
+
+        for(Store s : controller.getStores()){
+            System.out.println(Integer.toString(s.getIdStore())+". "+s.getName());
+        }
+
         System.out.println("Please input the store's id: ");
         int input = in.nextInt();
         controller.printStore(input);
     }
 
     public static void printSpecificClient(){
+        if(controller.getClients().isEmpty()){
+            System.out.println("There are no clients!");
+            return;
+        }
+
+        for(Client c : controller.getClients()){
+            System.out.println(Integer.toString(c.getIdClient())+". Client" + Integer.toString(c.getIdClient()));
+        }
+
         System.out.println("Please input the client's id: ");
         int input = in.nextInt();
         controller.printClient(input);

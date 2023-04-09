@@ -5,9 +5,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Controller implements ControllerInterface{
 
+    private static Controller controller = null;
     private Scanner in;
     private List<Store> stores;
     private List<Storage> storages;
@@ -15,7 +15,7 @@ public class Controller implements ControllerInterface{
     private List<Client> clients;
     private List<Distributor> distributors;
 
-    public Controller(){
+    private Controller(){
         stores = new ArrayList<Store>();
         storages = new ArrayList<Storage>();
         products = new ArrayList<Product>();
@@ -23,6 +23,13 @@ public class Controller implements ControllerInterface{
         distributors = new ArrayList<Distributor>();
 
         in = new Scanner(System.in);
+    }
+
+    public static Controller getInstance(){
+        if(controller == null){
+            controller = new Controller();
+        }
+        return controller;
     }
 
     @Override
@@ -61,10 +68,20 @@ public class Controller implements ControllerInterface{
         Client client = new Client();
         
         System.out.println("Please input how much money the client has:");
-
-        client.setMoney(in.nextInt());
+        boolean catch_error = true;
         
-        return client;//todo
+        do{
+            if(in.hasNextInt()){   
+                client.setMoney(in.nextInt());
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input! Try again");
+            }
+        }while(catch_error==true);
+        return client;
     }
 
     private Product inputProduct(){
@@ -77,7 +94,19 @@ public class Controller implements ControllerInterface{
         System.out.println("4.Telephone ");
         int typeOfProduct=0;
         do{
-            typeOfProduct = in.nextInt();
+            boolean catch_error = true;
+
+            do{
+                if(in.hasNextInt()){    
+                    typeOfProduct = in.nextInt();
+                    in.nextLine();
+                    catch_error = false;
+                }
+                else{
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            }while(catch_error==true);
             
             switch(typeOfProduct){
                 case 1 :{
@@ -117,7 +146,19 @@ public class Controller implements ControllerInterface{
 
         System.out.println("Please input your product's price: ");
         //in.nextLine();
-        product.setCost(in.nextInt());
+        boolean catch_error = true;
+        
+        do{
+            if(in.hasNextInt()){   
+                product.setCost(in.nextInt());
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input! Try again");
+            }
+        }while(catch_error==true);
         
         createDistributor(product.getBrand());
         
@@ -355,7 +396,7 @@ public class Controller implements ControllerInterface{
             return;
         }
         
-        int toMove=Math.max(inpuut, storage.getstoredProducts().get(products.get(input)));
+        int toMove=Math.min(inpuut, storage.getstoredProducts().get(products.get(input)));
 
         store.getAvailableProducts().put(products.get(input), toMove);
 
@@ -366,6 +407,7 @@ public class Controller implements ControllerInterface{
             storage.getstoredProducts().remove(products.get(input));
         }
     }
+
 }
 
 
