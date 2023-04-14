@@ -1,5 +1,7 @@
 package models;
 
+
+
 public class Telephone extends Product {
     
     

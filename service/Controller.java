@@ -41,6 +41,7 @@ public class Controller implements ControllerInterface{
     @Override 
     public void createStorage(){
         storages.add(new Storage());
+
     }
     @Override
     public void createProduct(){
