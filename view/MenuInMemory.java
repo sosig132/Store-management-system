@@ -7,17 +7,17 @@ import java.util.Scanner;
 
 public class MenuInMemory implements Menu {
     private  Controller controller = Controller.getInstance();
-    private static Menu MenuInMemory = null;
-    private MenuInMemory(){}
+    //private static Menu MenuInMemory = null;
+    //private MenuInMemory(){}
 
-    public static Menu getInstance(){
+    /*public static Menu getInstance(){
 
         if (MenuInMemory==null){
          MenuInMemory = new MenuInMemory();
         }
         return MenuInMemory;
 
-    }
+    }*/
 
     private  Scanner in = new Scanner(System.in);
 
