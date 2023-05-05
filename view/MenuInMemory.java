@@ -1,25 +1,35 @@
 package view;
-import java.util.Scanner;
 
 import models.*;
-import service.*;
+import service.Controller;
 
-public class MenuDB {
-    private  ControllerDB controller = ControllerDB.getInstance();
-    private static MenuDB menu = null;
-    private MenuDB(){}
+import java.util.Scanner;
 
-    public static MenuDB getInstance(){
+public class MenuInMemory implements Menu {
+    private  Controller controller = Controller.getInstance();
+    private static Menu MenuInMemory = null;
+    private MenuInMemory(){}
 
-        if(menu==null){
-            menu = new MenuDB();
+    public static Menu getInstance(){
+
+        if (MenuInMemory==null){
+         MenuInMemory = new MenuInMemory();
         }
-        return menu;
+        return MenuInMemory;
 
     }
-    
-    private static Scanner in = new Scanner(System.in);
 
+    private  Scanner in = new Scanner(System.in);
+
+    static{
+        Client.setCurrentId(0);
+        Distributor.setCurrentId(0);
+        Product.setCurrentId(0);
+        Storage.setCurrentId(0);
+        Store.setCurrentId(0);
+    }
+    
+    @Override
     public void start(){
         
         
@@ -63,13 +73,12 @@ public class MenuDB {
                     break;
                 }
                 case 3:{
-                    /*controller.getClients().sort((client1,client2)->client2.getMoney()-client1.getMoney());
+                    controller.getClients().sort((client1,client2)->client2.getMoney()-client1.getMoney());
                     int j = 0;
                     for (Client client : controller.getClients())    
                         System.out.println(Integer.toString(++j)+'.'+"Client"+Integer.toString(j)+" money: "+Integer.toString(client.getMoney()));
-                    break;*/
-                    controller.printClients();
                     break;
+                    
                 }
                 case 4:{
                     printSpecificClient();
@@ -133,6 +142,7 @@ public class MenuDB {
         }while (true);
     }
 
+    @Override
     public void manageStore(Store store){
         System.out.println("What do you want to do?");
 
@@ -155,14 +165,13 @@ public class MenuDB {
             }while(catch_error==true);
             
             
-            int store_id=0;
             switch(input){
                 case 1:{
-                    controller.order(store_id);
+                    controller.order(store);
                     break;
                 }
                 case 2:{
-                    controller.move(store_id);
+                    controller.move(store);
                     break;
                 }
                 case 3:{
@@ -177,6 +186,7 @@ public class MenuDB {
         }
     }
 
+    @Override
     public void shopping(){
         if(controller.getClients().isEmpty()){
             System.out.println("You didn't create any clients!");
@@ -272,6 +282,7 @@ public class MenuDB {
     
         }
     }
+    @Override
     public void printSpecificProduct(){
         if(controller.getProducts().isEmpty()){
             System.out.println("There are no products!");
@@ -298,6 +309,7 @@ public class MenuDB {
         controller.printProduct(input);
     }
 
+    @Override
     public void printSpecificDistributor(){
         if(controller.getDistributors().isEmpty()){
             System.out.println("There are no distributors!");
@@ -326,6 +338,7 @@ public class MenuDB {
     }
 
 
+    @Override
     public void printSpecificStore(){
         if(controller.getStores().isEmpty()){
             System.out.println("There are no stores!");
@@ -353,6 +366,7 @@ public class MenuDB {
         controller.printStore(input);
     }
 
+    @Override
     public void printSpecificClient(){
         if(controller.getClients().isEmpty()){
             System.out.println("There are no clients!");
@@ -424,5 +438,3 @@ public class MenuDB {
         }while(input!=1 && input!=2 && input!=3);
     }
 }
-
-

@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -89,13 +90,11 @@ public class ControllerDB implements ControllerInterface {
 
     
     public void createProduct() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createProduct'");
     }
 
     
     public void createDistributor(String name) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createDistributor'");
     }
 
@@ -135,7 +134,6 @@ public class ControllerDB implements ControllerInterface {
             System.out.println(rows+" row affected");
 
             statement.close();
-            connection.close();
             try{
                 write(myFile, "Inserted client into table clients");
         
@@ -151,55 +149,63 @@ public class ControllerDB implements ControllerInterface {
 
     
     public List<Store> getStores() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getStores'");
     }
 
     
     public List<Product> getProducts() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getProducts'");
     }
 
     
     public List<Client> getClients() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getClients'");
     }
 
     
     public List<Distributor> getDistributors() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getDistributors'");
     }
 
-    
+    public void printClients(){
+        try{
+            Connection connection = ConnectDB.getInstance();
+            String sqlInsert = "select * from clients";
+            PreparedStatement statement = connection.prepareStatement(sqlInsert);
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                int id = rs.getInt("client_id");
+                int money = rs.getInt("money");
+                System.out.println("ID: " + id + ", Money: "+money);
+            }
+            rs.close();
+            statement.close();
+       }catch(SQLException e){
+        e.printStackTrace();
+       }
+    }
     public void printClient(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printClient'");
     }
 
     
     public void printProduct(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printProduct'");
     }
 
     
     public void printDistributor(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printDistributor'");
     }
 
     
     public void printStore(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printStore'");
     }
 
     
     public void printStorage(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printStorage'");
     }
     

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final Menu menu = Menu.getInstance();
+    private static final Menu menu = MenuInMemory.getInstance();
     private static final MenuDB menuDB = MenuDB.getInstance();
 
     private static Scanner in = new Scanner(System.in);
