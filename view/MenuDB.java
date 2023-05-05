@@ -4,7 +4,7 @@ import java.util.Scanner;
 import models.*;
 import service.*;
 
-public class MenuDB {
+public class MenuDB implements Menu {
     private  ControllerDB controller = ControllerDB.getInstance();
     private static MenuDB menu = null;
     private MenuDB(){}
