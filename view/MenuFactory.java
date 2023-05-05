@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class MenuFactory {
 
-    private static Scanner in = new Scanner(System.in);
+    private Scanner in = new Scanner(System.in);
     //private static Menu menu;
-    public static Menu createMenu(){
+    public Menu createMenu(){
         System.out.println("What version do you want to use?");
         System.out.println("1. Local version");
         System.out.println("2. Database version");

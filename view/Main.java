@@ -9,8 +9,8 @@ public class Main {
     private static Menu menu;
     //private static Scanner in = new Scanner(System.in);
     public static void main(String[] args){
-
-        menu = MenuFactory.createMenu();
+        MenuFactory menuFactory = new MenuFactory();
+        menu = menuFactory.createMenu();
 
         menu.start();
     }
