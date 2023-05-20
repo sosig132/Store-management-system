@@ -6,17 +6,6 @@ import service.*;
 
 public class MenuDB implements Menu {
     private  ControllerDB controller = ControllerDB.getInstance();
-    //private static MenuDB menu = null;
-    //private MenuDB(){}
-
-    /*public static MenuDB getInstance(){
-
-        if(menu==null){
-            menu = new MenuDB();
-        }
-
-        return menu;
-    }*/
     
     private static Scanner in = new Scanner(System.in);
 

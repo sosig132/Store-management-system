@@ -1,12 +1,12 @@
 package view;
 
 import models.*;
-import service.Controller;
+import service.ControllerLocal;
 
 import java.util.Scanner;
 
 public class MenuInMemory implements Menu {
-    private  Controller controller = Controller.getInstance();
+    private  ControllerLocal controller = ControllerLocal.getInstance();
     //private static Menu MenuInMemory = null;
     //private MenuInMemory(){}
 

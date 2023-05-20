@@ -12,12 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import models.Client;
+import models.Clothing;
 import models.Distributor;
+import models.Food;
 import models.Product;
+import models.Sport;
 import models.Store;
+import models.Telephone;
 
 
-public class ControllerDB implements ControllerInterface {
+public class ControllerDB implements Controller {
 
     private static ControllerDB controllerDB = null;
     private ControllerDB(){}
@@ -56,20 +60,75 @@ public class ControllerDB implements ControllerInterface {
         System.out.println("Enter the store's name: ");
         String name = in.nextLine();
         
+        Store store = new Store(name);
         
         try{
 
             Connection connection = ConnectDB.getInstance();
             String sqlInsert = "INSERT INTO store (name) VALUES (?) ";
             PreparedStatement statement = connection.prepareStatement(sqlInsert);
-            statement.setString(1,name);
+            statement.setString(1,store.getName());
             int rows = statement.executeUpdate();
             System.out.println(rows+" row affected");
 
             statement.close();
-            connection.close();
+            ;
             try{
-                write(myFile, "Inserted "+name+" into table stores");
+                write(myFile, "Inserted "+store.getName()+" into table stores");
+        
+            }
+            catch(IOException e){
+                System.out.println("Coulnt't write to file");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        int store_id=0;
+        try{
+            Connection connection = ConnectDB.getInstance();
+            String sqlSelect = "SELECT store_id FROM store ORDER BY store_id DESC LIMIT 1";
+            PreparedStatement statement = connection.prepareStatement(sqlSelect);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+                store_id = rs.getInt("store_id");
+
+            statement.close();
+            
+            try{
+                write(myFile, "Selected store_id from table store");   
+            }
+            catch(IOException e){
+                System.out.println("Coulnt't write to file");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        createStorage(store_id);
+        
+        
+    }
+    
+    public void order(int store_id){}
+    public void move(int store_id){}
+
+    
+    public void createStorage(int i) {
+        try{
+
+            Connection connection = ConnectDB.getInstance();
+            String sqlInsert = "INSERT INTO storages(store_id) VALUES (?) ";
+            PreparedStatement statement = connection.prepareStatement(sqlInsert);
+            statement.setInt(1, i);
+            int rows = statement.executeUpdate();
+            System.out.println(rows+" row affected");
+
+            statement.close();
+            ;
+            try{
+                write(myFile, "Inserted storage into table storages");
         
             }
             catch(IOException e){
@@ -80,22 +139,280 @@ public class ControllerDB implements ControllerInterface {
             e.printStackTrace();
         }
     }
-    
-    public void order(int store_id){}
-    public void move(int store_id){}
-
-    
-    public void createStorage() {
-    }
 
     
     public void createProduct() {
-        throw new UnsupportedOperationException("Unimplemented method 'createProduct'");
+        ProductFactory productFactory = new ProductFactory();
+        Product product = productFactory.createProduct();
+
+        System.out.println("Please input your product's name: ");
+        //in.nextLine();
+        product.setName(in.nextLine());
+
+
+        System.out.println("Please input your product's brand: ");
+        //in.nextLine();
+        product.setBrand(in.nextLine());
+
+        System.out.println("Please input your product's price: ");
+        Boolean catch_error = true;
+        
+        do{
+            if(in.hasNextInt()){   
+                product.setCost(in.nextInt());
+                in.nextLine();
+                catch_error = false;
+            }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error);
+
+        try{
+            Connection connection = ConnectDB.getInstance();
+            String sqlInsert = "INSERT INTO product(name, brand, cost) VALUES (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sqlInsert);
+            statement.setString(1,product.getName());
+            statement.setString(2,product.getBrand());
+            statement.setInt(3, product.getCost());
+
+            int rows = statement.executeUpdate();
+            System.out.println(rows+" row affected");
+
+            statement.close();
+            ;
+            try{
+                write(myFile, "Inserted "+ product.getName() +" into table products");
+        
+            }
+            catch(IOException e){
+                System.out.println("Coulnt't write to file");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        int product_id=0;
+        try{
+            Connection connection = ConnectDB.getInstance();
+            String sqlSelect = "SELECT product_id FROM product ORDER BY product_id DESC LIMIT 1";
+            PreparedStatement statement = connection.prepareStatement(sqlSelect);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+                product_id = rs.getInt("product_id");
+
+            statement.close();
+            
+            try{
+                write(myFile, "Selected product_id from table product");   
+            }
+            catch(IOException e){
+                System.out.println("Coulnt't write to file");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        if (product instanceof Food){
+            System.out.println("Please input how much protein your food has: ");
+                catch_error = true;
+
+                do {
+                    if (in.hasNextInt()) {
+                        ((Food)product).setProtein(in.nextInt());
+                        //in.nextLine();
+                        catch_error = false;
+                    } else {
+                        in.nextLine();
+                        System.out.println("Invalid input!");
+                    }
+                } while (catch_error);
+            try{
+                Connection connection = ConnectDB.getInstance();
+                String sqlInsert = "INSERT INTO food(protein, product_id) VALUES (?, ?) ";
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                statement.setInt(1,((Food)product).getProtein());
+                statement.setInt(2,product_id);
+    
+                int rows = statement.executeUpdate();
+                System.out.println(rows+" row affected");
+    
+                statement.close();
+                ;
+                try{
+                    write(myFile, "Inserted "+ product.getName() +" into table food");               
+                }
+                catch(IOException e){
+                    System.out.println("Coulnt't write to file");
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+
+        else if (product instanceof Clothing){
+            System.out.println("Please input your clothing article's material: ");
+            ((Clothing) product).setMaterial(in.nextLine());
+
+            System.out.println("Please input your clothing article's size: ");
+            ((Clothing) product).setSize(in.nextLine());
+            try{
+                Connection connection = ConnectDB.getInstance();
+                String sqlInsert = "INSERT INTO clothing(material, size, product_id) VALUES (?, ?, ?) ";
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                statement.setString(1,((Clothing)product).getMaterial());
+                statement.setString(2,((Clothing)product).getSize());
+                statement.setInt(3, product_id);
+                int rows = statement.executeUpdate();
+                System.out.println(rows+" row affected");
+    
+                statement.close();
+                
+                try{
+                    write(myFile, "Inserted "+ product.getName() +" into table clothing");               
+                }
+                catch(IOException e){
+                    System.out.println("Coulnt't write to file");
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        else if(product instanceof Sport){
+            in.nextLine();
+            System.out.println("Please input what sport your product is for: ");
+            ((Sport) product).setSport(in.nextLine());
+            try{
+                Connection connection = ConnectDB.getInstance();
+                String sqlInsert = "INSERT INTO sport(sport, product_id) VALUES (?, ?) ";
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                statement.setString(1,((Sport)product).getSport());
+                statement.setInt(2, product_id);
+                int rows = statement.executeUpdate();
+                System.out.println(rows+" row affected");
+    
+                statement.close();
+                ;
+                try{
+                    write(myFile, "Inserted "+ product.getName() +" into table sport");               
+                }
+                catch(IOException e){
+                    System.out.println("Coulnt't write to file");
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        else if(product instanceof Telephone){
+            in.nextLine();
+            System.out.println("Please input the phone's height: ");
+            catch_error = true;
+
+            do {
+                if (in.hasNextInt()) {
+                    ((Telephone) product).setHeight(in.nextInt());
+                    in.nextLine();
+                    catch_error = false;
+                } else {
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            } while (catch_error);
+            System.out.println("Please input the phone's width: ");
+            catch_error = true;
+
+            do {
+                if (in.hasNextInt()) {
+                    ((Telephone) product).setWidth(in.nextInt());
+                    in.nextLine();
+                    catch_error = false;
+                } else {
+                    in.nextLine();
+                    System.out.println("Invalid input!");
+                }
+            } while (catch_error);
+            try{
+                Connection connection = ConnectDB.getInstance();
+                String sqlInsert = "INSERT INTO telephone(height, witdh, product_id) VALUES (?, ?, ?) ";
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                statement.setInt(1,((Telephone)product).getHeight());
+                statement.setInt(2,((Telephone)product).getWidth());
+                statement.setInt(3, product_id);
+                int rows = statement.executeUpdate();
+                System.out.println(rows+" row affected");
+    
+                statement.close();
+                ;
+                try{
+                    write(myFile, "Inserted "+ product.getName() +" into table telephone");               
+                }
+                catch(IOException e){
+                    System.out.println("Coulnt't write to file");
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+
+        createDistributor(product.getBrand());
+    
     }
 
     
     public void createDistributor(String name) {
-        throw new UnsupportedOperationException("Unimplemented method 'createDistributor'");
+        int check = 0;
+        try{
+            Connection connection = ConnectDB.getInstance();
+            String sqlSelect = "SELECT * FROM distributor WHERE name = '" + name+"'";
+            PreparedStatement statement = connection.prepareStatement(sqlSelect);
+
+            ResultSet rs = statement.executeQuery();
+            
+            if (rs.next() == false){
+                check = 1;
+            }
+
+            statement.close();
+            
+            try{
+                write(myFile, "Selected product_id from table distributor");   
+            }
+            catch(IOException e){
+                System.out.println("Coulnt't write to file");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        if(check == 1){
+            try{
+                Connection connection = ConnectDB.getInstance();
+                String sqlInsert = "INSERT INTO distributor(name) VALUES (?) ";
+                PreparedStatement statement = connection.prepareStatement(sqlInsert);
+                statement.setString(1, name);
+                int rows = statement.executeUpdate();
+                System.out.println(rows+" row affected");
+    
+                statement.close();
+                ;
+                try{
+                    write(myFile, "Inserted "+ name +" into table distributor");               
+                }
+                catch(IOException e){
+                    System.out.println("Coulnt't write to file");
+                }
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     
