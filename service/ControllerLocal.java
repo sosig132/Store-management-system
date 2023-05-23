@@ -242,7 +242,6 @@ public class ControllerLocal implements Controller{
         return distributors;
     }
 
-    @Override
     public void printClient(int id){
         int finished=0;
 
@@ -256,7 +255,6 @@ public class ControllerLocal implements Controller{
             System.out.println("There is no client with that id");
         }
     }
-    @Override
     public void printProduct(int id){
         int finished=0;
         for(Product product : products){
@@ -269,7 +267,6 @@ public class ControllerLocal implements Controller{
             System.out.println("There is no product with that id");
         }
     }
-    @Override
     public void printDistributor(int id){
         int finished=0;
 
@@ -283,7 +280,6 @@ public class ControllerLocal implements Controller{
             System.out.println("There is no distributor with that id");
         }
     }
-    @Override
     public void printStore(int id){
         int finished=0;
 
@@ -297,7 +293,6 @@ public class ControllerLocal implements Controller{
             System.out.println("There is no store with that id");
         }
     }
-    @Override
     public void printStorage(int id){
         int finished = 0;
         for(Storage storage : storages){

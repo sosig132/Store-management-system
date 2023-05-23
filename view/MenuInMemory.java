@@ -142,7 +142,6 @@ public class MenuInMemory implements Menu {
         }while (true);
     }
 
-    @Override
     public void manageStore(Store store){
         System.out.println("What do you want to do?");
 
@@ -282,7 +281,6 @@ public class MenuInMemory implements Menu {
     
         }
     }
-    @Override
     public void printSpecificProduct(){
         if(controller.getProducts().isEmpty()){
             System.out.println("There are no products!");
@@ -309,7 +307,6 @@ public class MenuInMemory implements Menu {
         controller.printProduct(input);
     }
 
-    @Override
     public void printSpecificDistributor(){
         if(controller.getDistributors().isEmpty()){
             System.out.println("There are no distributors!");
@@ -338,7 +335,6 @@ public class MenuInMemory implements Menu {
     }
 
 
-    @Override
     public void printSpecificStore(){
         if(controller.getStores().isEmpty()){
             System.out.println("There are no stores!");
@@ -366,7 +362,6 @@ public class MenuInMemory implements Menu {
         controller.printStore(input);
     }
 
-    @Override
     public void printSpecificClient(){
         if(controller.getClients().isEmpty()){
             System.out.println("There are no clients!");
@@ -394,6 +389,7 @@ public class MenuInMemory implements Menu {
         controller.printClient(input);
     }
 
+    @Override
     public void createEntity(){
         int input=-1;
         System.out.println("What kind of entity do you want to create?: ");

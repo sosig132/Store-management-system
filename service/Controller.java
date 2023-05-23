@@ -25,14 +25,6 @@ public interface Controller {
 
     List<Distributor> getDistributors();
 
-    void printClient(int id);
 
-    void printProduct(int id);
-
-    void printDistributor(int id);
-
-    void printStore(int id);
-
-    void printStorage(int id);
 
 }

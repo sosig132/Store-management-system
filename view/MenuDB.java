@@ -1,7 +1,6 @@
 package view;
 import java.util.Scanner;
 
-import models.*;
 import service.*;
 
 public class MenuDB implements Menu {
@@ -21,15 +20,18 @@ public class MenuDB implements Menu {
             System.out.println("1.Create entity");
             System.out.println("2.Take client shopping(if you created one)");
             System.out.println("3.Print clients");
-            System.out.println("4.Print a specific client");
+            System.out.println("4.Update client");
             System.out.println("5.Manage a store's stock");
             System.out.println("6.Print stores");
-            System.out.println("7.Print specific store");
+            System.out.println("7.Update store");
             System.out.println("8.Print distributors");
-            System.out.println("9.Print specific distributor");
-            System.out.println("10.Print products");
-            System.out.println("11.Print specific product");
-            System.out.println("12.Exit");
+            System.out.println("9.Print products");
+            System.out.println("10.Delete store");
+            System.out.println("11.Delete client");
+            System.out.println("12.Delete product");
+            System.out.println("13.Delete distributor");
+            
+            System.out.println("14.Exit");
             boolean catch_error=true;
             do{
                 if(in.hasNextInt()){   
@@ -53,30 +55,22 @@ public class MenuDB implements Menu {
                     break;
                 }
                 case 3:{
-                    /*controller.getClients().sort((client1,client2)->client2.getMoney()-client1.getMoney());
-                    int j = 0;
-                    for (Client client : controller.getClients())    
-                        System.out.println(Integer.toString(++j)+'.'+"Client"+Integer.toString(j)+" money: "+Integer.toString(client.getMoney()));
-                    break;*/
                     controller.printClients();
                     break;
                 }
                 case 4:{
-                    printSpecificClient();
+                    controller.updateClient();
                     break;
                 }
                 case 5:{
                     System.out.println("Which store do you want to manage?");
-                    int j = 0;
-                    for(Store store : controller.getStores()){
-                        System.out.println(Integer.toString(++j)+'.'+store.getName());
-                    }
+                    controller.printStores();
                     int inpuut =-1;
 
                     catch_error=true;
                     do{
                         if(in.hasNextInt()){   
-                            inpuut = in.nextInt()-1;
+                            inpuut = in.nextInt();
                             in.nextLine();
                             catch_error = false;
                         }
@@ -85,35 +79,45 @@ public class MenuDB implements Menu {
                             System.out.println("Invalid input!");
                         }
                     }while(catch_error==true);
-
-                    manageStore(controller.getStores().get(inpuut));
+                    
+                    manageStore(inpuut);
                     break;
                 }
                 case 6:{
-                    System.out.println(controller.getStores());
+                    controller.printStores();
                     break;
                 }
                 case 7:{
-                    printSpecificStore();
+                    controller.updateStore();
                     break;
                 }
                 case 8:{
-                    System.out.println(controller.getDistributors());
+                    controller.printDistributors();
                     break;
                 }
+
                 case 9:{
-                    printSpecificDistributor();
+                    controller.printProducts();
                     break;
                 }
+
                 case 10:{
-                    System.out.println(controller.getProducts());
+                    controller.deleteStore();
                     break;
                 }
                 case 11:{
-                    printSpecificProduct();
+                    controller.deleteClient();
                     break;
                 }
                 case 12:{
+                    controller.deleteProduct();
+                    break;
+                }
+                case 13:{
+                    controller.deleteDistributor();
+                    break;
+                }
+                case 14:{
                     System.exit(1);
                 }
                 default:{
@@ -123,7 +127,13 @@ public class MenuDB implements Menu {
         }while (true);
     }
 
-    public void manageStore(Store store){
+    public void manageStore(int inpuut){
+
+        if (controller.checkStore(inpuut) == false){
+            System.out.println("No store with that id");
+            return;
+        }
+        
         System.out.println("What do you want to do?");
 
         while(true){
@@ -145,14 +155,14 @@ public class MenuDB implements Menu {
             }while(catch_error==true);
             
             
-            int store_id=0;
+            
             switch(input){
                 case 1:{
-                    controller.order(store_id);
+                    controller.order(inpuut);
                     break;
                 }
                 case 2:{
-                    controller.move(store_id);
+                    controller.move(inpuut);
                     break;
                 }
                 case 3:{
@@ -168,79 +178,50 @@ public class MenuDB implements Menu {
     }
 
     public void shopping(){
-        if(controller.getClients().isEmpty()){
+        if(controller.checkClients()==false){
             System.out.println("You didn't create any clients!");
             return;
         }
 
-        if(controller.getStores().isEmpty()){
+        if(controller.checkStores()==false){
             System.out.println("You didn't create any stores!");
             return;
         }
 
-        if(controller.getProducts().isEmpty()){
+        if(controller.checkProducts()==false){
             System.out.println("You didn't create any products!");
             return;
         }
         
         System.out.println("Which client do you want to use?");
-        int j = 1;
-        for (Client client : controller.getClients()){
-            System.out.println(Integer.toString(j)+'.'+client);
-            ++j;
-        }
+        controller.printClients();
         
         int clientNr = -1;
 
         boolean catch_error=true;
-            do{
-                if(in.hasNextInt()){   
-                    clientNr = in.nextInt()-1;
-                    in.nextLine();
-                    catch_error = false;
-                }
-                else{
-                    in.nextLine();
-                    System.out.println("Invalid input!");
-                }
-            }while(catch_error==true);
-        while (clientNr>=controller.getClients().size()||clientNr<0){
-            System.out.println("Invalid input");
-            System.out.println("Which client do you want to use?");
-            j = 1;
-            for (Client client : controller.getClients()){
-                System.out.println(Integer.toString(j)+'.'+client);
-                ++j;
+        do{
+            if(in.hasNextInt()){   
+                clientNr = in.nextInt();
+                in.nextLine();
+                catch_error = false;
             }
-            catch_error=true;
-            do{
-                if(in.hasNextInt()){   
-                    clientNr = in.nextInt()-1;
-                    in.nextLine();
-                    catch_error = false;
-                }
-                else{
-                    in.nextLine();
-                    System.out.println("Invalid input!");
-                }
-            }while(catch_error==true);
-        }
+            else{
+                in.nextLine();
+                System.out.println("Invalid input!");
+            }
+        }while(catch_error==true);
+        
+
 
         int storeNr=-1;
         
         do{
             System.out.println("Which store do you want the client to go to?");
-            j = 1;
-            for (Store store : controller.getStores()){
-                System.out.println(Integer.toString(j)+'.'+store.getName());
-                ++j;
-            }
             
-
             catch_error=true;
             do{
                 if(in.hasNextInt()){   
-                    storeNr = in.nextInt()-1;
+                    storeNr = in.nextInt();
                     in.nextLine();
                     catch_error = false;
                 }
@@ -250,126 +231,22 @@ public class MenuDB implements Menu {
                 }
             }while(catch_error==true);
             
-            if (storeNr>=controller.getStores().size()||storeNr<0){
+            if (storeNr>controller.storesSize()||storeNr<0){
                 System.out.println("Invalid input");
+                return;
             }
         
-        }while (storeNr>=controller.getStores().size()||storeNr<0);
-        if(controller.getStores().get(storeNr).getBannedClients().contains(controller.getClients().get(clientNr)))
+        }while (storeNr>controller.storesSize()||storeNr<0);
+        if(controller.checkIfClientBanned(clientNr, storeNr)==true){
             System.out.println("Client is banned from this store");    
-        else{
-            controller.putItemsInCart(clientNr,storeNr);
+            return;
+        }
+        controller.putItemsInCart(clientNr,storeNr);
     
-        }
-    }
-    public void printSpecificProduct(){
-        if(controller.getProducts().isEmpty()){
-            System.out.println("There are no products!");
-            return;
-        }
-        for(Product p : controller.getProducts()){
-            System.out.println(Integer.toString(p.getIdProduct())+". "+p.getName());
-        }
-
-        System.out.println("Please input the product's id: ");
-        int input = -1;
-        boolean catch_error=true;
-        do{
-            if(in.hasNextInt()){   
-                input = in.nextInt();
-                in.nextLine();
-                catch_error = false;
-            }
-            else{
-                in.nextLine();
-                System.out.println("Invalid input!");
-            }
-        }while(catch_error==true);
-        controller.printProduct(input);
-    }
-
-    public void printSpecificDistributor(){
-        if(controller.getDistributors().isEmpty()){
-            System.out.println("There are no distributors!");
-            return;
-        }
-        for(Distributor d : controller.getDistributors()){
-            System.out.println(Integer.toString(d.getIdDistributor())+". "+d.getName());
-        }
-
-        System.out.println("Please input the distributor's id: ");
-        int input = -1;
-        boolean catch_error=true;
-        do{
-            if(in.hasNextInt()){   
-                input = in.nextInt();
-                in.nextLine();
-                catch_error = false;
-            }
-            else{
-                in.nextLine();
-                System.out.println("Invalid input!");
-            }
-        }while(catch_error==true);
         
-        controller.printDistributor(input);
     }
 
-
-    public void printSpecificStore(){
-        if(controller.getStores().isEmpty()){
-            System.out.println("There are no stores!");
-            return;
-        }
-
-        for(Store s : controller.getStores()){
-            System.out.println(Integer.toString(s.getIdStore())+". "+s.getName());
-        }
-
-        System.out.println("Please input the store's id: ");
-        int input = -1;
-        boolean catch_error=true;
-        do{
-            if(in.hasNextInt()){   
-                input = in.nextInt();
-                in.nextLine();
-                catch_error = false;
-            }
-            else{
-                in.nextLine();
-                System.out.println("Invalid input!");
-            }
-        }while(catch_error==true);
-        controller.printStore(input);
-    }
-
-    public void printSpecificClient(){
-        if(controller.getClients().isEmpty()){
-            System.out.println("There are no clients!");
-            return;
-        }
-
-        for(Client c : controller.getClients()){
-            System.out.println(Integer.toString(c.getIdClient())+". Client" + Integer.toString(c.getIdClient()));
-        }
-
-        System.out.println("Please input the client's id: ");
-        int input = -1;
-        boolean catch_error=true;
-        do{
-            if(in.hasNextInt()){   
-                input = in.nextInt();
-                in.nextLine();
-                catch_error = false;
-            }
-            else{
-                in.nextLine();
-                System.out.println("Invalid input!");
-            }
-        }while(catch_error==true);
-        controller.printClient(input);
-    }
-
+    @Override
     public void createEntity(){
         int input=-1;
         System.out.println("What kind of entity do you want to create?: ");
