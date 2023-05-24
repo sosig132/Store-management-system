@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class ConnectDB {
     private static Connection connection=null;
-    private static String user = "root";
-    private static String password = "windous10";
+    private static String user = "admin";
+    private static String password = "password";
     private static String url = "jdbc:mysql://localhost:3306/lant_magazine";
     private ConnectDB(){}
 
